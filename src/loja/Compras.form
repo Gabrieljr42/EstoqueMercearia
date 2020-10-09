@@ -239,6 +239,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Estoque"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EstoqueActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="addproduto">
       <Properties>

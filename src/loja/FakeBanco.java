@@ -18,7 +18,7 @@ import java.util.Vector;
  */
 public class FakeBanco {
     private static Vector<Produtos> produtos;
-    private static void cargaArquivo(){
+    public static void cargaArquivo(){
         //Ajuste na criação
         if(produtos == null){
             produtos = new Vector<>();
@@ -54,6 +54,7 @@ public class FakeBanco {
             System.err.println("Erro ao acessar o arquivo");
         }
     }
+    
     public static Produtos consulta(int cod){
        if(produtos == null){
         cargaArquivo();
@@ -66,7 +67,7 @@ public class FakeBanco {
        }
         return null;
     }
-    
+   
     public static void atualizaArquivo(){
        File arquivo = new File("C:\\Users\\gabri\\Downloads\\Produtos.csv");
        try{
@@ -83,5 +84,41 @@ public class FakeBanco {
            System.err.println("dispositivo com falha");
        }
        
+    }
+    //busca produtos pelo nome
+    public static Vector<Produtos> consultaNome(String nome){
+        Vector<Produtos> temp = null;
+       
+        if(nome.isEmpty()){
+            temp = produtos;
+        }
+        else{
+            //Consulta por nome
+            temp =  new Vector<>();
+            for(int cont = 0; cont < produtos.size();cont++){
+                if(produtos.get(cont).getNome().toLowerCase().startsWith(nome.toLowerCase())){
+                    temp.add(produtos.get(cont));
+                }
+            }
+        }
+       return temp;
+    }
+    
+    public static void deleteProduto(Produtos p){
+        for(int cont = 0; cont != produtos.size();cont ++){
+            if(p.getCodigo() == produtos.get(cont).getCodigo()){
+                produtos.remove(cont);
+            }
+        }
+    }
+    
+    public static void insertProduto(Produtos novoProd){
+        //calculando o id do produto
+        int cod = 1;
+        if(!produtos.isEmpty()){
+            cod = produtos.lastElement().getCodigo()+1;
+        }
+        novoProd.setCodigo(cod);
+        produtos.add(novoProd);
     }
 }

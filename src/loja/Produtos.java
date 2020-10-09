@@ -9,7 +9,7 @@ package loja;
  *
  * @author gabri
  */
-public class Produtos {
+public class Produtos implements Comparable<Produtos>{
     private int codigo;
     private String nome;
     private double preço;
@@ -37,6 +37,10 @@ public class Produtos {
         return this.codigo+";"+this.nome+";"+this.preço+";"+this.quantidade;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
    
 
     public double getPreço() {
@@ -51,8 +55,23 @@ public class Produtos {
         return quantidade;
     }
 
+    public Produtos(String nome, double preço, int quantidade) {
+        this.nome = nome;
+        this.preço = preço;
+        this.quantidade = quantidade;
+    }
+
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    @Override
+    public int compareTo(Produtos o) {
+       return this.nome.toLowerCase().compareTo(o.getNome().toLowerCase());
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
         
     

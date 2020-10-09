@@ -7,6 +7,7 @@ package loja;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.util.HashMap;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -21,17 +22,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private static JPanel trocainformação;
     //gerencia qual painel estará visivel
     private static CardLayout paineisLayout;
+    //
+    private static HashMap<String, JPanel> paineis;
     
     public TelaPrincipal() {
         initComponents();
         MyInitComponents();
-        
+      
     }
     
     private void MyInitComponents(){
         //Ocupando o frame com a barra de rolagem
         barra = new JScrollPane();
-        
+       FakeBanco.cargaArquivo();
+       paineis = new HashMap<>();
         //barra dew rolagem ocoupará todo o espaço do frame
         this.setLayout(new BorderLayout());
         this.add(barra);
@@ -40,14 +44,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
          trocainformação =  new JPanel(paineisLayout);
          
          barra.setViewportView(trocainformação);
-         trocainformação.add(new Compras(),"Compras");
-         paineisLayout.show(trocainformação,"Compras");
+         //trocainformação.add(new Compras(),"Compras");
+         //paineisLayout.show(trocainformação,"Compras");
+         efetuatransição(new Compras(), "compra");
     }
         public static void efetuatransição(JPanel Novo, String name){
-            trocainformação.add(Novo,name);
+            if(Novo != null){
+                //Uusuario nunca interagiu com esse painel
+                trocainformação.add(Novo,name);
+                paineis.put(name,Novo);
+            }
+            
             paineisLayout.show(trocainformação,name);
             
-            trocainformação.setPreferredSize(Novo.getPreferredSize());
+            trocainformação.setPreferredSize(paineis.get(name).getPreferredSize());
         }
 
     /**

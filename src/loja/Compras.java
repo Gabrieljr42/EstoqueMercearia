@@ -124,6 +124,11 @@ public class Compras extends javax.swing.JPanel {
 
         Estoque.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         Estoque.setText("Estoque");
+        Estoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EstoqueActionPerformed(evt);
+            }
+        });
 
         addproduto.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         addproduto.setText("ADD PRODUTO");
@@ -363,6 +368,10 @@ public class Compras extends javax.swing.JPanel {
         }
        
     }//GEN-LAST:event_FinalizarActionPerformed
+
+    private void EstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstoqueActionPerformed
+        TelaPrincipal.efetuatransição(new Estoque(), "estoque");
+    }//GEN-LAST:event_EstoqueActionPerformed
 
     public void setPrecoCompra(double precoCompra) {
         this.precoCompra = precoCompra;
